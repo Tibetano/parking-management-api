@@ -1,11 +1,11 @@
-package br.com.api.parkingmanagementapi.dtos;
+package br.com.api.parkingmanagementapi.dtos.vehicle;
 
 import br.com.api.parkingmanagementapi.enums.VehicleType;
 import br.com.api.parkingmanagementapi.models.Vehicle;
 
 import java.time.Instant;
 
-public record VehiculeResponseDTO(
+public record VehicleResponseDTO(
         String mark,
         String model,
         String color,
@@ -13,7 +13,7 @@ public record VehiculeResponseDTO(
         VehicleType type,
         Instant createdAt
 ) {
-    public VehiculeResponseDTO(Vehicle vehicle){
+    public VehicleResponseDTO(Vehicle vehicle){
         this(
                 vehicle.getMark(),
                 vehicle.getModel(),

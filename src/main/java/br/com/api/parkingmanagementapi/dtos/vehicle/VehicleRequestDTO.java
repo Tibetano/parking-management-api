@@ -1,10 +1,10 @@
-package br.com.api.parkingmanagementapi.dtos;
+package br.com.api.parkingmanagementapi.dtos.vehicle;
 
 import br.com.api.parkingmanagementapi.enums.VehicleType;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-public record VehiculeRequestDTO(
+public record VehicleRequestDTO(
         @NotBlank(message = "The vehicle's mark must be provided.")
         String mark,
         @NotBlank(message = "The vehicle's model must be provided.")

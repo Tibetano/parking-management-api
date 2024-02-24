@@ -1,8 +1,8 @@
 package br.com.api.parkingmanagementapi.controllers;
 
 import br.com.api.parkingmanagementapi.dtos.CommonResponseDTO;
-import br.com.api.parkingmanagementapi.dtos.VehiculeRequestDTO;
-import br.com.api.parkingmanagementapi.dtos.VehiculeResponseDTO;
+import br.com.api.parkingmanagementapi.dtos.vehicle.VehicleRequestDTO;
+import br.com.api.parkingmanagementapi.dtos.vehicle.VehicleResponseDTO;
 import br.com.api.parkingmanagementapi.models.Vehicle;
 import br.com.api.parkingmanagementapi.services.VehicleCRUDService;
 import jakarta.validation.Valid;
@@ -22,23 +22,23 @@ public class VehicleController {
     @GetMapping("/{plate}")
     public ResponseEntity<?> findVehicle(@PathVariable(value = "plate") String plate){
         Vehicle vehicle = vehicleCRUDService.findVehicle(plate);
-        return ResponseEntity.status(HttpStatus.OK).body(new VehiculeResponseDTO(vehicle));
+        return ResponseEntity.status(HttpStatus.OK).body(new VehicleResponseDTO(vehicle));
     }
 
     @GetMapping
     public ResponseEntity<?> findAllVehicles(){
-        List<VehiculeResponseDTO> vehicleList = vehicleCRUDService.findAllVehicles().stream().map(VehiculeResponseDTO::new).toList();
+        List<VehicleResponseDTO> vehicleList = vehicleCRUDService.findAllVehicles().stream().map(VehicleResponseDTO::new).toList();
         return ResponseEntity.status(HttpStatus.OK).body(vehicleList);
     }
 
     @PostMapping
-    public ResponseEntity<?> registerVehicle(@Valid @RequestBody VehiculeRequestDTO vehiculeRequestDTO){
+    public ResponseEntity<?> registerVehicle(@Valid @RequestBody VehicleRequestDTO vehiculeRequestDTO){
         vehicleCRUDService.registerVehicle(new Vehicle(vehiculeRequestDTO));
         return ResponseEntity.status(HttpStatus.CREATED).body(new CommonResponseDTO("Vehicule registred successfully."));
     }
 
     @PutMapping("/{plate}")
-    public ResponseEntity<?> updateVehicle(@PathVariable(value = "plate") String plate, @RequestBody VehiculeRequestDTO vehiculeRequestDTO){
+    public ResponseEntity<?> updateVehicle(@PathVariable(value = "plate") String plate, @RequestBody VehicleRequestDTO vehiculeRequestDTO){
         vehicleCRUDService.updateVehicle(plate,new Vehicle(vehiculeRequestDTO));
         return ResponseEntity.status(HttpStatus.OK).body(new CommonResponseDTO("Vehicule updated successfully."));
     }

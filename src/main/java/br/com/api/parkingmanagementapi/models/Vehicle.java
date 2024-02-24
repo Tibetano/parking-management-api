@@ -1,6 +1,6 @@
 package br.com.api.parkingmanagementapi.models;
 
-import br.com.api.parkingmanagementapi.dtos.VehiculeRequestDTO;
+import br.com.api.parkingmanagementapi.dtos.vehicle.VehicleRequestDTO;
 import br.com.api.parkingmanagementapi.enums.VehicleType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,7 +27,7 @@ public class Vehicle {
         BeanUtils.copyProperties(vehicleModel,this);
     }
 
-    public Vehicle(VehiculeRequestDTO vehiculeRequestDTO){
+    public Vehicle(VehicleRequestDTO vehiculeRequestDTO){
         this.mark = vehiculeRequestDTO.mark();
         this.model = vehiculeRequestDTO.model();
         this.color = vehiculeRequestDTO.color();

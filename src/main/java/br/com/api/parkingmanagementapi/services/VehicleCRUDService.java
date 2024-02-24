@@ -17,23 +17,23 @@ public class VehicleCRUDService {
     public Vehicle findVehicle(String plate){
         var DBVehicle = vehicleRepository.findByPlate(plate);
         if (DBVehicle.isEmpty()){
-            throw new RuntimeException("Erro: vehicle not found.");
+            throw new RuntimeException("Error: vehicle not found.");
         }
         return new Vehicle(DBVehicle.get());
     }
 
     public List<Vehicle> findAllVehicles(){
-        var DBVehicles = vehicleRepository.findAll().stream().map(Vehicle::new).toList();
-        if (DBVehicles.isEmpty()){
-            throw new RuntimeException("Erro: no vehicles found.");
+        var DBVehiclesList = vehicleRepository.findAll().stream().map(Vehicle::new).toList();
+        if (DBVehiclesList.isEmpty()){
+            throw new RuntimeException("Error: no vehicles found.");
         }
-        return DBVehicles;
+        return DBVehiclesList;
     }
 
     public void registerVehicle(Vehicle vehicle){
         var existsVehicle = vehicleRepository.existsByPlate(vehicle.getPlate());
         if (existsVehicle){
-            throw new RuntimeException("Erro: plate already registered.");
+            throw new RuntimeException("Error: plate already registered.");
         }
         var newVehicle = new VehicleModel(vehicle, Instant.now());
         var res = vehicleRepository.save(newVehicle);
@@ -42,7 +42,7 @@ public class VehicleCRUDService {
     public void updateVehicle(String plate,Vehicle vehicle){
         var DBVehicle = vehicleRepository.findByPlate(plate);
         if (DBVehicle.isEmpty()){
-            throw new RuntimeException("Erro: vehicle not found.");
+            throw new RuntimeException("Error: vehicle not found.");
         }
         DBVehicle.get().update(vehicle);
         vehicleRepository.save(DBVehicle.get());
@@ -51,7 +51,7 @@ public class VehicleCRUDService {
     public void deleteVehicle(String plate){
         var DBVehicle = vehicleRepository.findByPlate(plate);
         if (DBVehicle.isEmpty()){
-            throw new RuntimeException("Erro: vehicle not found.");
+            throw new RuntimeException("Error: vehicle not found.");
         }
         vehicleRepository.delete(DBVehicle.get());
     }
