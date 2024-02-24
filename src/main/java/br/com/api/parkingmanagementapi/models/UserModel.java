@@ -28,6 +28,7 @@ public class UserModel {
     @Enumerated(EnumType.STRING)
     private UserRole role;
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "UTC")
+    @NotNull(message = "The user creation date must be provided.")
     private Instant createsAt;
 
 }

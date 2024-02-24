@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.Instant;
 import java.util.List;
 
 @Entity(name = "vehicles")
@@ -33,9 +34,28 @@ public class VehicleModel {
     @NotNull(message = "The vehicle's type must be provided.")
     @Enumerated(EnumType.STRING)
     private VehicleType type;
+    @NotNull(message = "The vehicle creation date must be provided.")
+    private Instant createdAt;
 
     @JsonIgnore
     @OneToMany(mappedBy = "vehicle")
     private List<ParkingRecordModel> parkingsRecords;
 
+    public VehicleModel(Vehicle vehicle, Instant createdAt) {
+        this.mark = vehicle.getMark();
+        this.model = vehicle.getModel();
+        this.color = vehicle.getColor();
+        this.plate = vehicle.getPlate();
+        this.type = vehicle.getType();
+        this.createdAt = createdAt;
+    }
+
+    public void update(Vehicle vehicle){
+        this.mark = vehicle.getMark() != null ? vehicle.getMark() : this.mark;
+        this.model = vehicle.getModel() != null ? vehicle.getModel() : this.model;
+        this.color = vehicle.getColor() != null ? vehicle.getColor() : this.color;
+        this.plate = vehicle.getPlate() != null ? vehicle.getPlate() : this.plate;
+        this.type = vehicle.getType() != null ? vehicle.getType() : this.type;
+        this.parkingsRecords = vehicle.getParkingsRecords() != null ? vehicle.getParkingsRecords() : this.parkingsRecords;
+    }
 }
