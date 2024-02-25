@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 
 import java.time.Instant;
 
-@Entity(name = "parkingRecord")
-@Table(name = "parkingRecord")
+@Entity(name = "parkingRecords")
+@Table(name = "parkingRecords")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -31,4 +31,10 @@ public class ParkingRecordModel {
     @JoinColumn(name = "establishment_id",nullable = false)
     private EstablishmentModel establishment;
 
+    public ParkingRecordModel(ParkingRecord parkingRecord) {
+        this.input = parkingRecord.getInput();
+        this.output = parkingRecord.getOutput();
+        this.vehicle = parkingRecord.getVehicle();
+        this.establishment = parkingRecord.getEstablishment();
+    }
 }
