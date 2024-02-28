@@ -39,13 +39,13 @@ public class UserController {
 
     @PutMapping("/{username}")
     public ResponseEntity<?> updateUser(@PathVariable(value = "username") String username, @Valid @RequestBody UserRequestDTO userRequestDTO){
-        userCRUDService.updateUser(new User(username,userRequestDTO.password(),null));
+        userCRUDService.updateUser(username, new User(userRequestDTO.username(),userRequestDTO.password(),null));
         return ResponseEntity.status(HttpStatus.OK).body(new CommonResponseDTO("User updated successfully."));
     }
 
     @PutMapping("/e/{username}")
     public ResponseEntity<?> updateUserRole(@PathVariable(value = "username") String username, UserRole role){
-        userCRUDService.updateUser(new User(username,null,role));
+        userCRUDService.updateUser(username, new User(null,null,role));
         return ResponseEntity.status(HttpStatus.OK).body(new CommonResponseDTO("User updated successfully."));
     }
 

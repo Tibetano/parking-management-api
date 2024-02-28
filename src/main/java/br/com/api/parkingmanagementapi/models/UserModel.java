@@ -8,6 +8,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.time.Instant;
 
@@ -48,7 +49,7 @@ public class UserModel {
 
     public void update(User user){
         this.username = user.getUsername() != null ? user.getUsername() : this.username;
-        this.password = user.getPassword() != null ? user.getPassword() : this.password;
+        this.password = user.getPassword() != null ? new BCryptPasswordEncoder().encode(user.getPassword()) : this.password;
         this.role = user.getRole() != null ? user.getRole() : this.role;
     }
 }

@@ -42,8 +42,8 @@ public class UserCRUDService {
         userRepositiry.save(newUser);
     }
 
-    public void updateUser(User user){
-        var DBUser = userRepositiry.findByUsername(user.getUsername());
+    public void updateUser(String username, User user){
+        var DBUser = userRepositiry.findByUsername(username);
         if (DBUser.isEmpty()){
             throw new RuntimeException("Erro: user not found.");
         }
