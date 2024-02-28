@@ -2,6 +2,7 @@ package br.com.api.parkingmanagementapi.controllers;
 
 import br.com.api.parkingmanagementapi.dtos.CommonResponseDTO;
 import br.com.api.parkingmanagementapi.dtos.user.UserRequestDTO;
+import br.com.api.parkingmanagementapi.enums.UserRole;
 import br.com.api.parkingmanagementapi.models.User;
 import br.com.api.parkingmanagementapi.services.UserCRUDService;
 import jakarta.validation.Valid;
@@ -32,13 +33,19 @@ public class UserController {
 
     @PostMapping()
     public ResponseEntity<?> registerUser(@Valid @RequestBody UserRequestDTO userRequestDTO){
-        userCRUDService.registerUser(new User(userRequestDTO.username(),userRequestDTO.password(),userRequestDTO.userRole()));
+        userCRUDService.registerUser(new User(userRequestDTO.username(),userRequestDTO.password(), null));
         return ResponseEntity.status(HttpStatus.CREATED).body(new CommonResponseDTO("User registered successfully."));
     }
 
     @PutMapping("/{username}")
     public ResponseEntity<?> updateUser(@PathVariable(value = "username") String username, @Valid @RequestBody UserRequestDTO userRequestDTO){
-        userCRUDService.updateUser(username,new User(username,userRequestDTO.password(),userRequestDTO.userRole()));
+        userCRUDService.updateUser(new User(username,userRequestDTO.password(),null));
+        return ResponseEntity.status(HttpStatus.OK).body(new CommonResponseDTO("User updated successfully."));
+    }
+
+    @PutMapping("/e/{username}")
+    public ResponseEntity<?> updateUserRole(@PathVariable(value = "username") String username, UserRole role){
+        userCRUDService.updateUser(new User(username,null,role));
         return ResponseEntity.status(HttpStatus.OK).body(new CommonResponseDTO("User updated successfully."));
     }
 

@@ -28,10 +28,20 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(autorizacao -> autorizacao
 
                         .requestMatchers(HttpMethod.POST,
+                                "/v1/user",
                                 "/v1/auth/login"
                         ).permitAll()
+
+                        //.requestMatchers(HttpMethod.GET, "").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/v1/user/{username}").permitAll()
+                        //.requestMatchers(HttpMethod.DELETE, "").permitAll()
                         .requestMatchers(HttpMethod.GET,
-                                "/v1/parkingRecord/**",
+                                "/v1/parkingRecord/input/{establishment}",
+                                "/v1/parkingRecord/output/{establishment}",
+                                "/v1/parkingRecord/average-time/{vehicleType}",
+                                "/v1/parkingRecord/occupancy-rate/{establishment}",
+                                "/v1/parkingRecord/entry-hour/{establishment}",
+                                "/v1/parkingRecord/exit-hour/{establishment}",
                                 "/v1/establishment/{cnpj}",
                                 "/v1/establishment",
                                 "/v1/user/{username}",
@@ -42,13 +52,12 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.POST,
                                 "/v1/parkingRecord",
                                 "/v1/establishment",
-                                "/v1/vehicle",
-                                "/v1/user"
+                                "/v1/vehicle"
                         ).hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT,
                                 "/v1/establishment/{cnpj}",
                                 "/v1/vehicle/{plate}",
-                                "/v1/user/{username}",
+                                "/v1/e/user/{username}",
                                 "/v1/parkingRecord/{plate}"
                         ).hasRole("ADMIN")//colocar uma verificação para que um usuário mau intencionado não consiga apagar veiculos de outros usuário e depois remover esse endpoint de apagar veiculos da restrição de só pra admins.
                         .requestMatchers(HttpMethod.DELETE,

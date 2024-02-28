@@ -1,5 +1,6 @@
 package br.com.api.parkingmanagementapi.services;
 
+import br.com.api.parkingmanagementapi.enums.UserRole;
 import br.com.api.parkingmanagementapi.models.User;
 import br.com.api.parkingmanagementapi.models.UserModel;
 import br.com.api.parkingmanagementapi.repositories.UserRepositiry;
@@ -37,12 +38,12 @@ public class UserCRUDService {
             throw new RuntimeException("Username already taken.");
         }
         String encryptedPassword = new BCryptPasswordEncoder().encode(user.getPassword());
-        UserModel newUser = new UserModel(user.getUsername(), encryptedPassword, user.getRole(), Instant.now());
+        UserModel newUser = new UserModel(user.getUsername(), encryptedPassword, UserRole.USER, Instant.now());
         userRepositiry.save(newUser);
     }
 
-    public void updateUser(String username,User user){
-        var DBUser = userRepositiry.findByUsername(username);
+    public void updateUser(User user){
+        var DBUser = userRepositiry.findByUsername(user.getUsername());
         if (DBUser.isEmpty()){
             throw new RuntimeException("Erro: user not found.");
         }

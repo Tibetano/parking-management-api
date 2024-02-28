@@ -25,6 +25,35 @@ public class User implements UserDetails {
         this.role = userModel.getRole();
     }
 
+    private User(Builder builder){
+        this.username = builder.username;
+        this.password = builder.password;
+        this.role = builder.role;
+    }
+
+    public static class Builder{
+        private String username;
+        private String password;
+        private UserRole role;
+
+        public Builder username(String username){
+            this.username = username;
+            return this;
+        }
+        public Builder password(String password){
+            this.password = password;
+            return this;
+        }
+        public Builder userRole(UserRole role){
+            this.role = role;
+            return this;
+        }
+
+        public User build(){
+            return new User(this);
+        }
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         if (role == UserRole.ADMIN){
