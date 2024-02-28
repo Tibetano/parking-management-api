@@ -5,7 +5,7 @@ import br.com.api.parkingmanagementapi.dtos.parkingRecord.ParkingRecordRequestDT
 import br.com.api.parkingmanagementapi.enums.VehicleType;
 import br.com.api.parkingmanagementapi.services.ParkingRecordService;
 import br.com.api.parkingmanagementapi.services.SummaryService;
-import br.com.api.parkingmanagementapi.utils.CnpjFormatter;
+import org.hibernate.validator.constraints.br.CNPJ;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -37,23 +37,23 @@ public class ParkingRecordController {
 
     @GetMapping("/input/{establishment}")
     public ResponseEntity<?> totalVehicleEntries(
-            @PathVariable(value = "establishment") String cnpjEstablishment,
+            @PathVariable(value = "establishment") @CNPJ String cnpjEstablishment,
             @RequestParam VehicleType vehicleType,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) Instant start,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) Instant finish
     ){
-        Long numberOfVehicles = summaryService.totalVehicleEntries(CnpjFormatter.format(cnpjEstablishment),vehicleType,start,finish);
+        Long numberOfVehicles = summaryService.totalVehicleEntries(cnpjEstablishment,vehicleType,start,finish);
         return ResponseEntity.status(HttpStatus.OK).body(new CommonResponseDTO(numberOfVehicles.toString() + " " + vehicleType + "(S)."));
     }
 
     @GetMapping("/output/{establishment}")
     public ResponseEntity<?> totalVehicleDepartures(
-            @PathVariable(value = "establishment") String cnpjEstablishment,
+            @PathVariable(value = "establishment") @CNPJ String cnpjEstablishment,
             @RequestParam VehicleType vehicleType,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) Instant start,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) Instant finish
     ){
-        Long numberOfVehicles = summaryService.totalVehicleDepartures(CnpjFormatter.format(cnpjEstablishment),vehicleType,start,finish);
+        Long numberOfVehicles = summaryService.totalVehicleDepartures(cnpjEstablishment,vehicleType,start,finish);
         return ResponseEntity.status(HttpStatus.OK).body(new CommonResponseDTO(numberOfVehicles.toString() + " " + vehicleType + "(S)."));
     }
 
@@ -65,9 +65,9 @@ public class ParkingRecordController {
 
     @GetMapping("/occupancy-rate/{establishment}")
     public ResponseEntity<?> parkingOccupancyRate(
-            @PathVariable(value = "establishment") String cnpjEstablishment
+            @PathVariable(value = "establishment") @CNPJ String cnpjEstablishment
     ){
-        List<Double> occupancyRate = summaryService.parkingOccupancyRate(CnpjFormatter.format(cnpjEstablishment));
+        List<Double> occupancyRate = summaryService.parkingOccupancyRate(cnpjEstablishment);
         return ResponseEntity.status(HttpStatus.OK).body(new CommonResponseDTO(occupancyRate.get(0) + "% occupied car spaces. " +
                 occupancyRate.get(1) + "% occupied motorcycle spaces."+
                 "Total occupancy: "+occupancyRate.get(2)+"% " ));
@@ -75,21 +75,21 @@ public class ParkingRecordController {
 
     @GetMapping("/entry-hour/{establishment}")
     public ResponseEntity<?> vehicleEntriesPerHour(
-            @PathVariable(value = "establishment") String cnpjEstablishment,
+            @PathVariable(value = "establishment") @CNPJ String cnpjEstablishment,
             @RequestParam VehicleType vehicleType,
             @RequestParam Instant date
     ){
-        List<String> numberOfVehiclesPerHour = summaryService.vehicleEntriesPerHour(CnpjFormatter.format(cnpjEstablishment),vehicleType,date);
+        List<String> numberOfVehiclesPerHour = summaryService.vehicleEntriesPerHour(cnpjEstablishment,vehicleType,date);
         return ResponseEntity.status(HttpStatus.OK).body(numberOfVehiclesPerHour);
     }
 
     @GetMapping("/exit-hour/{establishment}")
     public ResponseEntity<?> vehicleDeparturesPerHour(
-            @PathVariable(value = "establishment") String cnpjEstablishment,
+            @PathVariable(value = "establishment") @CNPJ String cnpjEstablishment,
             @RequestParam VehicleType vehicleType,
             @RequestParam Instant date
     ){
-        List<String> numberOfVehiclesPerHour = summaryService.vehicleDeparturesPerHour(CnpjFormatter.format(cnpjEstablishment),vehicleType,date);
+        List<String> numberOfVehiclesPerHour = summaryService.vehicleDeparturesPerHour(cnpjEstablishment,vehicleType,date);
         return ResponseEntity.status(HttpStatus.OK).body(numberOfVehiclesPerHour);
     }
 }

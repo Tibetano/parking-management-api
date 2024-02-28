@@ -6,6 +6,7 @@ import br.com.api.parkingmanagementapi.dtos.establishment.EstablishmentResponseD
 import br.com.api.parkingmanagementapi.models.Establishment;
 import br.com.api.parkingmanagementapi.services.EstablishmentCRUDService;
 import jakarta.validation.Valid;
+import org.hibernate.validator.constraints.br.CNPJ;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,9 +21,8 @@ public class EstablishmentController {
     private EstablishmentCRUDService establishmentCRUDService;
 
     @GetMapping("/{cnpj}")
-    public ResponseEntity<?> findEstablishment(@PathVariable(value = "cnpj") String cnpj){
-        String cnpjTreated = cnpj.replace("_","/");
-        Establishment establishment = establishmentCRUDService.findEstablishment(cnpjTreated);
+    public ResponseEntity<?> findEstablishment(@PathVariable(value = "cnpj") @CNPJ String cnpj){
+        Establishment establishment = establishmentCRUDService.findEstablishment(cnpj);
         return ResponseEntity.status(HttpStatus.OK).body(new EstablishmentResponseDTO(establishment));
     }
 
@@ -39,16 +39,14 @@ public class EstablishmentController {
     }
 
     @PutMapping("/{cnpj}")
-    public ResponseEntity<?> updateEstablishment(@PathVariable(value = "cnpj") String cnpj, @RequestBody EstablishmentRequestDTO establishmentRequestDTO){
-        String cnpjTratado = cnpj.replace("_","/");
-        establishmentCRUDService.updateEstablishment(cnpjTratado,new Establishment(establishmentRequestDTO));
+    public ResponseEntity<?> updateEstablishment(@PathVariable(value = "cnpj") @CNPJ String cnpj, @RequestBody EstablishmentRequestDTO establishmentRequestDTO){
+        establishmentCRUDService.updateEstablishment(cnpj,new Establishment(establishmentRequestDTO));
         return ResponseEntity.status(HttpStatus.OK).body(new CommonResponseDTO("Establishment updated successfully."));
     }
 
     @DeleteMapping("/{cnpj}")
-    public ResponseEntity<?> deleteEstablishment(@PathVariable(value = "cnpj") String cnpj){
-        String cnpjTreated = cnpj.replace("_","/");
-        establishmentCRUDService.deleteEstablishment(cnpjTreated);
+    public ResponseEntity<?> deleteEstablishment(@PathVariable(value = "cnpj") @CNPJ String cnpj){
+        establishmentCRUDService.deleteEstablishment(cnpj);
         return ResponseEntity.status(HttpStatus.OK).body(new CommonResponseDTO("Establishment deleted successfully."));
     }
 }
