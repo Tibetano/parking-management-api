@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -63,6 +64,24 @@ public class SummaryService {
         listOfPercentages.add(percentageOfCarSpaces);
         listOfPercentages.add(percentageOfMotorcycleSpaces);
         listOfPercentages.add(totalPercentage);
+        return listOfPercentages;
+    }
+
+    public Map<String,List<Double>> parkingOccupancyRateList(){
+        Map<String,List<Double>> listOfPercentages = new HashMap<>();
+        Map<String,List<Long>> numberParkingRecordOfCarsAndMotorcyclesByEstablishment = customParkingRecordsRepository.countOpenVehicleReservationsByEstablishment();
+        if (numberParkingRecordOfCarsAndMotorcyclesByEstablishment.isEmpty()){
+            throw new RuntimeException("The current occupancies rate are 0%.");
+        }
+        for (var line : numberParkingRecordOfCarsAndMotorcyclesByEstablishment.entrySet()){
+            Double percentageOfCarSpaces =  (line.getValue().get(2).doubleValue() / line.getValue().get(0).doubleValue())*100;
+            Double percentageOfMotorcycleSpaces =  (line.getValue().get(3).doubleValue() / line.getValue().get(1).doubleValue())*100;
+            Double totalPercentage = (percentageOfCarSpaces + percentageOfMotorcycleSpaces)/2;
+            listOfPercentages.put(
+                    line.getKey(),
+                    List.of(percentageOfCarSpaces,percentageOfMotorcycleSpaces,totalPercentage)
+            );
+        }
         return listOfPercentages;
     }
 

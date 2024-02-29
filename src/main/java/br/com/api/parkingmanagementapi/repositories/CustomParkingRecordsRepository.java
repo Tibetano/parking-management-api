@@ -71,7 +71,35 @@ public class CustomParkingRecordsRepository {
         return numberParkingRecordOfCarsAndMotorcycles;
     }
 
-    //public List<Pair<BigDecimal,Long>> countVehicleEntryPerHour(EstablishmentModel establishmentModel, VehicleType vehicleType, Instant data){
+    public Map<String,List<Long>> countOpenVehicleReservationsByEstablishment(){
+        Map<String,List<Long>> numberParkingRecordOfCarsAndMotorcyclesByEstablishments = new HashMap<>();
+        String sql = "SELECT cars.cnpj, cars.max_car, motorcycles.max_moto, cars.qtde_cars, motorcycles.qtde_motorcycles\n" +
+                    "FROM \n" +
+                    "(SELECT e.cnpj,e.number_of_car_spaces as max_car, COUNT(*) AS qtde_cars\n" +
+                    "FROM parking_records pr \n" +
+                    "INNER JOIN vehicles v ON pr.vehicle_id = v.id \n" +
+                    "INNER JOIN establishments e ON pr.establishment_id = e.id\n" +
+                    "WHERE v.type = 'CAR' AND pr.output IS NULL\n" +
+                    "GROUP BY v.type, e.cnpj,e.number_of_car_spaces) AS cars INNER JOIN\n" +
+                    "(SELECT e.cnpj,e.number_of_motorcycle_spaces as max_moto, COUNT(*) AS qtde_motorcycles\n" +
+                    "FROM parking_records pr \n" +
+                    "INNER JOIN vehicles v ON pr.vehicle_id = v.id \n" +
+                    "INNER JOIN establishments e ON pr.establishment_id = e.id\n" +
+                    "WHERE v.type = 'MOTORCYCLE' AND pr.output IS NULL\n" +
+                    "GROUP BY v.type, e.cnpj, e.number_of_motorcycle_spaces) as motorcycles\n" +
+                    "ON cars.cnpj = motorcycles.cnpj";
+        List<Object[]> DBNumberParkingRecordOfCarsAndMotorcyclesByEstablishments = entityManager.createNativeQuery(sql).getResultList();
+        for (Object[] line : DBNumberParkingRecordOfCarsAndMotorcyclesByEstablishments){
+            numberParkingRecordOfCarsAndMotorcyclesByEstablishments.put(
+                                                                        (String)line[0],
+                                                                        List.of(((Integer)line[1]).longValue(),
+                                                                        ((Integer)line[2]).longValue(),
+                                                                        (Long)line[3],
+                                                                        (Long)line[4]));
+        }
+        return numberParkingRecordOfCarsAndMotorcyclesByEstablishments;
+    }
+
     public Map<BigDecimal,Long> countVehicleEntryPerHour(EstablishmentModel establishmentModel, VehicleType vehicleType, Instant data){
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy/MM/dd").withZone(ZoneId.systemDefault());
         Map<BigDecimal,Long> hourVehicleList = new HashMap<>();//(hour,amount)

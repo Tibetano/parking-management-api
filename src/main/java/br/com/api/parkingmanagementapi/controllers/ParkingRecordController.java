@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/v1/parkingRecord")
@@ -71,6 +73,20 @@ public class ParkingRecordController {
         return ResponseEntity.status(HttpStatus.OK).body(new CommonResponseDTO(occupancyRate.get(0) + "% occupied car spaces. " +
                 occupancyRate.get(1) + "% occupied motorcycle spaces."+
                 "Total occupancy: "+occupancyRate.get(2)+"% " ));
+    }
+
+    @GetMapping("/occupancy-rate")
+    public ResponseEntity<?> parkingOccupancyRateList(){
+        List<String> parkingOccupancyRateList = new ArrayList<>();
+        Map<String,List<Double>> occupancyRateList = summaryService.parkingOccupancyRateList();
+
+        for (var line : occupancyRateList.entrySet()){
+            parkingOccupancyRateList.add("CNPJ: " +line.getKey() +", "+ line.getValue().get(0) + "% occupied car spaces. " +
+                    line.getValue().get(1) + "% occupied motorcycle spaces."+
+                    "Total occupancy: "+line.getValue().get(2)+"% ");
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body(parkingOccupancyRateList);
     }
 
     @GetMapping("/entry-hour/{establishment}")

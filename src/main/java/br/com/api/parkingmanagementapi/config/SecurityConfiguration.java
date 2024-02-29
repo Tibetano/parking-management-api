@@ -26,20 +26,21 @@ public class SecurityConfiguration {
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(autorizacao -> autorizacao
-
                         .requestMatchers(HttpMethod.POST,
                                 "/v1/user",
                                 "/v1/auth/login"
                         ).permitAll()
-
-                        //.requestMatchers(HttpMethod.GET, "").permitAll()
+                        .requestMatchers(HttpMethod.GET,
+                                "/v1/parkingRecord/occupancy-rate/{establishment}",
+                                "/v1/parkingRecord/occupancy-rate"
+                        ).hasRole("USER")
                         .requestMatchers(HttpMethod.PUT, "/v1/user/{username}").permitAll()
                         //.requestMatchers(HttpMethod.DELETE, "").permitAll()
                         .requestMatchers(HttpMethod.GET,
                                 "/v1/parkingRecord/input/{establishment}",
                                 "/v1/parkingRecord/output/{establishment}",
                                 "/v1/parkingRecord/average-time/{vehicleType}",
-                                "/v1/parkingRecord/occupancy-rate/{establishment}",
+                                //"/v1/parkingRecord/occupancy-rate/{establishment}",
                                 "/v1/parkingRecord/entry-hour/{establishment}",
                                 "/v1/parkingRecord/exit-hour/{establishment}",
                                 "/v1/establishment/{cnpj}",
