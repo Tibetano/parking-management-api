@@ -33,7 +33,7 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.GET,
                                 "/v1/parkingRecord/occupancy-rate/{establishment}",
                                 "/v1/parkingRecord/occupancy-rate"
-                        ).hasRole("USER")
+                        ).permitAll()
                         .requestMatchers(HttpMethod.PUT, "/v1/user/{username}").permitAll()
                         //.requestMatchers(HttpMethod.DELETE, "").permitAll()
                         .requestMatchers(HttpMethod.GET,
