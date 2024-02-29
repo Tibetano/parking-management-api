@@ -25,6 +25,14 @@ public class UserModel {
     private String username;
     @NotBlank(message = "The password must be provided.")
     private String password;
+
+    @NotBlank(message = "The cpf must be provided.")
+    private String cpf;
+    @NotBlank(message = "The phone number must be provided.")
+    private String phoneNumber;
+    @NotBlank(message = "The email must be provided.")
+    private String email;
+
     @NotNull(message = "The user role must be provided.")
     @Enumerated(EnumType.STRING)
     private UserRole role;
@@ -37,19 +45,30 @@ public class UserModel {
     public UserModel(User user){
         this.username = user.getUsername();
         this.password = user.getPassword();
+        this.cpf = user.getCpf();
+        this.phoneNumber = user.getPhoneNumber();
+        this.email = user.getEmail();
         this.role = user.getRole();
     }
 
-    public UserModel(String username, String password, UserRole role, Instant createdAt){
+    public UserModel(String username, String password, String cpf, String phoneNumber, String email, UserRole role, Instant createdAt){
         this.username = username;
         this.password = password;
+        this.cpf = cpf;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
         this.role = role;
         this.createdAt = createdAt;
     }
 
     public void update(User user){
+        System.out.println("cpf: "+this.cpf);
         this.username = user.getUsername() != null ? user.getUsername() : this.username;
         this.password = user.getPassword() != null ? new BCryptPasswordEncoder().encode(user.getPassword()) : this.password;
+        this.cpf = user.getCpf() != null ? user.getCpf() : this.cpf;
+        this.phoneNumber = user.getPhoneNumber() != null ? user.getPhoneNumber() : this.phoneNumber;
+        this.email = user.getEmail() != null ? user.getEmail() : this.email;
         this.role = user.getRole() != null ? user.getRole() : this.role;
+        System.out.println("cpf: "+this.cpf);
     }
 }

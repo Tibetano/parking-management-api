@@ -6,7 +6,7 @@ public record EstablishmentResponseDTO(
         String name,
         String cnpj,
         String address,
-        String phone,
+        String phoneNumber,
         Integer NumberOfCarSpaces,
         Integer NumberOfMotorcycleSpaces
 ) {
@@ -15,7 +15,7 @@ public record EstablishmentResponseDTO(
                 establishment.getName(),
                 establishment.getCnpj(),
                 establishment.getAddress(),
-                establishment.getPhone(),
+                establishment.getPhoneNumber(),
                 establishment.getNumberOfCarSpaces(),
                 establishment.getNumberOfMotorcycleSpaces()
         );

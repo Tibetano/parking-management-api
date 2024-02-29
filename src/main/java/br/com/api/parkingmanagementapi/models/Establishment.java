@@ -15,7 +15,7 @@ public class Establishment {
     private String name;
     private String cnpj;
     private String address;
-    private String phone;
+    private String phoneNumber;
     private Integer numberOfCarSpaces;
     private Integer numberOfMotorcycleSpaces;
     private Instant createdAt;
@@ -25,7 +25,7 @@ public class Establishment {
         this.name = establishmentModel.getName();
         this.cnpj = establishmentModel.getCnpj();
         this.address = establishmentModel.getAddress();
-        this.phone = establishmentModel.getPhone();
+        this.phoneNumber = establishmentModel.getPhoneNumber();
         this.numberOfCarSpaces = establishmentModel.getNumberOfCarSpaces();
         this.numberOfMotorcycleSpaces = establishmentModel.getNumberOfMotorcycleSpaces();
     }
@@ -34,7 +34,7 @@ public class Establishment {
         this.name = establishmentRequestDTO.name();
         this.cnpj = establishmentRequestDTO.cnpj();
         this.address = establishmentRequestDTO.address();
-        this.phone = establishmentRequestDTO.phone();
+        this.phoneNumber = establishmentRequestDTO.phoneNumber();
         this.numberOfCarSpaces = establishmentRequestDTO.numberOfCarSpaces();
         this.numberOfMotorcycleSpaces = establishmentRequestDTO.numberOfMotorcycleSpaces();
     }

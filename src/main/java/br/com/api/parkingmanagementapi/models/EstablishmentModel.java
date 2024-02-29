@@ -27,8 +27,8 @@ public class EstablishmentModel {
     private String cnpj;
     @NotBlank(message = "The address of the establishment must be provided.")
     private String address;
-    @NotBlank(message = "The phone of the establishment must be provided.")
-    private String phone;
+    @NotBlank(message = "The phone number of the establishment must be provided.")
+    private String phoneNumber;
     @NotNull(message = "The number of car spaces must be informed for the establishment.")
     @Min(value = 0, message = "The number of car spaces can't negative.")
     private Integer numberOfCarSpaces;
@@ -46,7 +46,7 @@ public class EstablishmentModel {
         this.name = establishment.getName();
         this.cnpj = establishment.getCnpj();
         this.address = establishment.getAddress();
-        this.phone = establishment.getPhone();
+        this.phoneNumber = establishment.getPhoneNumber();
         this.numberOfCarSpaces = establishment.getNumberOfCarSpaces();
         this.numberOfMotorcycleSpaces = establishment.getNumberOfMotorcycleSpaces();
         this.createdAt = createdAt;
@@ -56,7 +56,7 @@ public class EstablishmentModel {
         this.name = establishment.getName() != null ? establishment.getName() : this.name;
         this.cnpj = establishment.getCnpj() != null ? establishment.getCnpj() : this.cnpj;
         this.address = establishment.getAddress() != null ? establishment.getAddress() : this.address;
-        this.phone = establishment.getPhone() != null ? establishment.getPhone() : this.phone;
+        this.phoneNumber = establishment.getPhoneNumber() != null ? establishment.getPhoneNumber() : this.phoneNumber;
         this.numberOfCarSpaces = establishment.getNumberOfCarSpaces() != null ? establishment.getNumberOfCarSpaces() : this.numberOfCarSpaces;
         this.numberOfMotorcycleSpaces = establishment.getNumberOfMotorcycleSpaces() != null ? establishment.getNumberOfMotorcycleSpaces() : this.numberOfMotorcycleSpaces;
         this.parkingsRecords = establishment.getParkingsRecords() != null ? establishment.getParkingsRecords() : this.parkingsRecords;

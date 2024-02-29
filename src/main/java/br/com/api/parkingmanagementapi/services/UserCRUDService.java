@@ -38,7 +38,7 @@ public class UserCRUDService {
             throw new RuntimeException("Username already taken.");
         }
         String encryptedPassword = new BCryptPasswordEncoder().encode(user.getPassword());
-        UserModel newUser = new UserModel(user.getUsername(), encryptedPassword, UserRole.USER, Instant.now());
+        UserModel newUser = new UserModel(user.getUsername(), encryptedPassword,user.getCpf(),user.getPhoneNumber(),user.getEmail(), UserRole.USER, Instant.now());
         userRepositiry.save(newUser);
     }
 
@@ -48,6 +48,9 @@ public class UserCRUDService {
             throw new RuntimeException("Erro: user not found.");
         }
         DBUser.get().update(user);
+        System.out.println(DBUser.get());
+        System.out.println("++++++++++++++++++++++");
+        System.out.println(DBUser.get());
         userRepositiry.save(DBUser.get());
     }
 

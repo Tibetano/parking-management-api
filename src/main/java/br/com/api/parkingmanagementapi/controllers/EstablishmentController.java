@@ -34,6 +34,7 @@ public class EstablishmentController {
 
     @PostMapping
     public ResponseEntity<?> registerEstablishment(@RequestBody @Valid EstablishmentRequestDTO establishmentRequestDTO){
+        System.out.println(establishmentRequestDTO);
         establishmentCRUDService.registerEstablishment(new Establishment(establishmentRequestDTO));
         return ResponseEntity.status(HttpStatus.CREATED).body(new CommonResponseDTO("Establishment registred successfully."));
     }

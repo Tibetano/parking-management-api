@@ -33,19 +33,31 @@ public class UserController {
 
     @PostMapping()
     public ResponseEntity<?> registerUser(@Valid @RequestBody UserRequestDTO userRequestDTO){
-        userCRUDService.registerUser(new User(userRequestDTO.username(),userRequestDTO.password(), null));
+        userCRUDService.registerUser(new User(userRequestDTO.username(),
+                                              userRequestDTO.password(),
+                                              userRequestDTO.cpf(),
+                                              userRequestDTO.phoneNumber(),
+                                              userRequestDTO.email(),
+                                            null));
         return ResponseEntity.status(HttpStatus.CREATED).body(new CommonResponseDTO("User registered successfully."));
     }
 
     @PutMapping("/{username}")
     public ResponseEntity<?> updateUser(@PathVariable(value = "username") String username, @Valid @RequestBody UserRequestDTO userRequestDTO){
-        userCRUDService.updateUser(username, new User(userRequestDTO.username(),userRequestDTO.password(),null));
+        System.out.println("-----------------------------------------");
+        System.out.println(userRequestDTO);
+        userCRUDService.updateUser(username, new User(userRequestDTO.username(),
+                                   userRequestDTO.password(),
+                                   userRequestDTO.cpf(),
+                                   userRequestDTO.phoneNumber(),
+                                   userRequestDTO.email(),
+                                null));
         return ResponseEntity.status(HttpStatus.OK).body(new CommonResponseDTO("User updated successfully."));
     }
 
     @PutMapping("/e/{username}")
     public ResponseEntity<?> updateUserRole(@PathVariable(value = "username") String username, UserRole role){
-        userCRUDService.updateUser(username, new User(null,null,role));
+        userCRUDService.updateUser(username, new User(null,null,null,null,null,role));
         return ResponseEntity.status(HttpStatus.OK).body(new CommonResponseDTO("User updated successfully."));
     }
 
