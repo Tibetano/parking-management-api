@@ -2,7 +2,6 @@ package br.com.api.parkingmanagementapi.repositories;
 
 import br.com.api.parkingmanagementapi.enums.VehicleType;
 import br.com.api.parkingmanagementapi.models.EstablishmentModel;
-import br.com.api.parkingmanagementapi.utils.Pair;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
@@ -12,8 +11,9 @@ import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class CustomParkingRecordsRepository {
@@ -71,9 +71,10 @@ public class CustomParkingRecordsRepository {
         return numberParkingRecordOfCarsAndMotorcycles;
     }
 
-    public List<Pair<BigDecimal,Long>> countVehicleEntryPerHour(EstablishmentModel establishmentModel, VehicleType vehicleType, Instant data){
+    //public List<Pair<BigDecimal,Long>> countVehicleEntryPerHour(EstablishmentModel establishmentModel, VehicleType vehicleType, Instant data){
+    public Map<BigDecimal,Long> countVehicleEntryPerHour(EstablishmentModel establishmentModel, VehicleType vehicleType, Instant data){
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy/MM/dd").withZone(ZoneId.systemDefault());
-        List<Pair<BigDecimal,Long>> numberOfVehiclesPerHour = new ArrayList<Pair<BigDecimal,Long>>();
+        Map<BigDecimal,Long> hourVehicleList = new HashMap<>();//(hour,amount)
         String sql = "SELECT EXTRACT(HOUR FROM pr.input), COUNT(*)\n" +
                 "FROM parking_records pr INNER JOIN vehicles v ON pr.vehicle_id = v.id\n" +
                 "WHERE pr.establishment_id = '"+establishmentModel.getId()+"' AND v.type = '"
@@ -81,14 +82,14 @@ public class CustomParkingRecordsRepository {
                 "GROUP BY EXTRACT(HOUR FROM pr.input)";
         List<Object[]> list = entityManager.createNativeQuery(sql).getResultList();
         for (Object[] line : list){
-            numberOfVehiclesPerHour.add(new Pair<BigDecimal,Long>((BigDecimal)line[0],(Long) line[1]));
+            hourVehicleList.put((BigDecimal)line[0],(Long) line[1]);
         }
-        return numberOfVehiclesPerHour;
+        return hourVehicleList;
     }
 
-    public List<Pair<BigDecimal,Long>> CountVehicleDeparturesPerHour(EstablishmentModel establishmentModel,VehicleType vehicleType, Instant date){
+    public Map<BigDecimal,Long> CountVehicleDeparturesPerHour(EstablishmentModel establishmentModel,VehicleType vehicleType, Instant date){
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy/MM/dd").withZone(ZoneId.systemDefault());
-        List<Pair<BigDecimal,Long>> numberOfVehiclesPerHour = new ArrayList<Pair<BigDecimal,Long>>();
+        Map<BigDecimal,Long> hourVehicleList = new HashMap<>();//(hour,amount)
         String sql = "SELECT EXTRACT(HOUR FROM pr.input), COUNT(*)\n" +
                 "FROM parking_records pr INNER JOIN vehicles v ON pr.vehicle_id = v.id\n" +
                 "WHERE pr.establishment_id = '"+establishmentModel.getId()+"' AND v.type = '"
@@ -96,8 +97,8 @@ public class CustomParkingRecordsRepository {
                 "GROUP BY EXTRACT(HOUR FROM pr.input)";
         List<Object[]> list = entityManager.createNativeQuery(sql).getResultList();
         for (Object[] line : list){
-            numberOfVehiclesPerHour.add(new Pair<BigDecimal,Long>((BigDecimal)line[0],(Long) line[1]));
+            hourVehicleList.put((BigDecimal)line[0],(Long) line[1]);
         }
-        return numberOfVehiclesPerHour;
+        return hourVehicleList;
     }
 }

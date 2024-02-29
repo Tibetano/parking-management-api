@@ -3,7 +3,6 @@ package br.com.api.parkingmanagementapi.services;
 import br.com.api.parkingmanagementapi.enums.VehicleType;
 import br.com.api.parkingmanagementapi.repositories.CustomParkingRecordsRepository;
 import br.com.api.parkingmanagementapi.repositories.EstablishmentRepository;
-import br.com.api.parkingmanagementapi.utils.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +10,7 @@ import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class SummaryService {
@@ -72,12 +72,12 @@ public class SummaryService {
         if(DBEstablishment.isEmpty()){
             throw new RuntimeException("Erro: Establishment not found.");
         }
-        List<Pair<BigDecimal,Long>> DBNumberOfVehiclesPerHour = customParkingRecordsRepository.countVehicleEntryPerHour(DBEstablishment.get(), vehicleType, date);
+        Map<BigDecimal,Long> DBNumberOfVehiclesPerHour = customParkingRecordsRepository.countVehicleEntryPerHour(DBEstablishment.get(), vehicleType, date);
         if(DBNumberOfVehiclesPerHour.isEmpty()){
             throw new RuntimeException("No " + vehicleType.toString().toLowerCase() + "s entered the parking lot at this time.");
         }
-        for (var linha : DBNumberOfVehiclesPerHour){
-            String msg = "Hour: "+linha.getFirst()+"h"+", amount: "+linha.getSecond()+" "+vehicleType +"(s).";
+        for (var line : DBNumberOfVehiclesPerHour.entrySet()){
+            String msg = "Hour: "+line.getKey()+"h"+", amount: "+line.getValue()+" "+vehicleType +"(s).";
             numberOfVehiclesPerHour.add(msg);
         }
         return numberOfVehiclesPerHour;
@@ -89,12 +89,12 @@ public class SummaryService {
         if(DBEstablishment.isEmpty()){
             throw new RuntimeException("Erro: Establishment not found.");
         }
-        List<Pair<BigDecimal,Long>> DBNumberOfVehiclesPerHour = customParkingRecordsRepository.CountVehicleDeparturesPerHour(DBEstablishment.get(),vehicleType,date);
+        Map<BigDecimal,Long> DBNumberOfVehiclesPerHour = customParkingRecordsRepository.CountVehicleDeparturesPerHour(DBEstablishment.get(),vehicleType,date);
         if(DBNumberOfVehiclesPerHour.isEmpty()){
             throw new RuntimeException("No " + vehicleType.toString().toLowerCase() + "s left the parking lot at that time.");
         }
-        for (var linha : DBNumberOfVehiclesPerHour){
-            String msg = "Hour: "+linha.getFirst()+"h"+", amount: "+linha.getSecond()+" "+vehicleType +"(s).";
+        for (var line : DBNumberOfVehiclesPerHour.entrySet()){
+            String msg = "Hour: "+line.getKey()+"h"+", amount: "+line.getValue()+" "+vehicleType +"(s).";
             numberOfVehiclesPerHour.add(msg);
         }
         return numberOfVehiclesPerHour;
