@@ -13,19 +13,19 @@ A aplicação consiste em gerenciar as vagas para estacionamentos em estabelecim
 
 ## Recursos disponíveis
 
-1 . **Estacionar veículos:** Permite ao funcionário reservar uma vaga para um vaículo(carro/moto) em um estabelecimento específico.
-2 . **Liberar veículos:** Permite ao funcionário liberar uma vaga ocupada por um vaículo(carro/moto) em um estabelecimento específico.
-3 . **Total de Entradas de Carros:** O número total de carros que entraram no estacionamento durante um período específico.
-4 . **Total de Saídas de Carros:** O número total de carros que saíram do estacionamento durante o mesmo período.
-5 . **Total de Entradas de Motos:** O número total de motos que entraram no estacionamento durante o mesmo período.
-6 . **Total de Saídas de Motos:** O número total de motos que saíram do estacionamento durante o mesmo período.
-7 . **Tempo Médio de Permanência dos Carros:** A média do tempo que os carros permaneceram estacionados no estacionamento antes de sair.
-8 . **Tempo Médio de Permanência das Motos:** A média do tempo que as motos permaneceram estacionadas no estacionamento antes de sair.
-9 . **Taxa de Ocupação do Estacionamento:** A porcentagem da capacidade total do estacionamento que está sendo utilizada durante o período especificado.
-10 . **Entradas de Carros por Hora:** O número de carros que entraram no estacionamento em cada hora específica do dia.
-11 . **Saídas de Carros por Hora:** O número de carros que saíram do estacionamento em cada hora específica do dia.
-12 . **Entradas de Motos por Hora:** O número de motos que entraram no estacionamento em cada hora específica do dia.
-13 . **Saídas de Motos por Hora:** O número de motos que saíram do estacionamento em cada hora específica do dia.
+- **Estacionar veículos:** Permite ao funcionário reservar uma vaga para um vaículo(carro/moto) em um estabelecimento específico.
+- **Liberar veículos:** Permite ao funcionário liberar uma vaga ocupada por um vaículo(carro/moto) em um estabelecimento específico.
+- **Total de Entradas de Carros:** O número total de carros que entraram no estacionamento durante um período específico.
+- **Total de Saídas de Carros:** O número total de carros que saíram do estacionamento durante o mesmo período.
+- **Total de Entradas de Motos:** O número total de motos que entraram no estacionamento durante o mesmo período.
+- **Total de Saídas de Motos:** O número total de motos que saíram do estacionamento durante o mesmo período.
+- **Tempo Médio de Permanência dos Carros:** A média do tempo que os carros permaneceram estacionados no estacionamento antes de sair.
+- **Tempo Médio de Permanência das Motos:** A média do tempo que as motos permaneceram estacionadas no estacionamento antes de sair.
+- **Taxa de Ocupação do Estacionamento:** A porcentagem da capacidade total do estacionamento que está sendo utilizada durante o período especificado.
+- **Entradas de Carros por Hora:** O número de carros que entraram no estacionamento em cada hora específica do dia.
+- **Saídas de Carros por Hora:** O número de carros que saíram do estacionamento em cada hora específica do dia.
+- **Entradas de Motos por Hora:** O número de motos que entraram no estacionamento em cada hora específica do dia.
+- **Saídas de Motos por Hora:** O número de motos que saíram do estacionamento em cada hora específica do dia.
 
 ## Modelo conceitual da API
 ![Modelo Conceitual](https://raw.githubusercontent.com/Tibetano/assets/main/Diagrama-classes.png)
