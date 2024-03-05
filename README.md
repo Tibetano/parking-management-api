@@ -1,7 +1,11 @@
 # Parking Management 
-[![NPM](https://img.shields.io/npm/l/react)](https://github.com/Tibetano/parking-management-api/blob/main/LICENSE) 
-
-
+<p align="center">
+<a href="https://github.com/Tibetano/parking-management-api/blob/main/LICENSE" style="text-decoration: none; color: inherit;">  <img src="http://img.shields.io/static/v1?label=License&message=MIT&color=green&style=for-the-badge"/>  </a>
+<a href="https://www.example.com" style="text-decoration: none; color: inherit;">  <img src="http://img.shields.io/badge/Java-17%2B-green?style=for-the-badge&logo=java"/>  </a>
+<a href="https://www.example.com" style="text-decoration: none; color: inherit;">  <img alt="GitHub" src="https://img.shields.io/static/v1?label=GitHub&message=deploy&color=blue&style=for-the-badge&logo=github"/>  </a>
+<a href="https://www.example.com" style="text-decoration: none; color: inherit;">  <img alt="Docker" src="https://img.shields.io/static/v1?label=Docker&message=container&color=blue&style=for-the-badge&logo=docker"/>  </a>
+<a href="https://www.example.com" style="text-decoration: none; color: inherit;">  <img src="http://img.shields.io/static/v1?label=VERSAO&message=0.0.1&color=GREEN&style=for-the-badge"/>  </a>
+</p>
 
 
 
@@ -35,6 +39,7 @@ A aplicação consiste em gerenciar as vagas para estacionamentos em estabelecim
 - JPA / Hibernate
 - Maven
 - PostgreSQL
+- Docker
 
 # Como executar o projeto
 
