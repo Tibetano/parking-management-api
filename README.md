@@ -13,15 +13,15 @@ A aplicação consiste em gerenciar as vagas para estacionamentos em estabelecim
 
 ## Recursos disponíveis
 
-- **Estacionar veículos:** Permite ao funcionário reservar uma vaga para um vaículo(carro/moto) em um estabelecimento específico.
-- **Liberar veículos:** Permite ao funcionário liberar uma vaga ocupada por um vaículo(carro/moto) em um estabelecimento específico.
-- **Total de Entradas de veículos:** Permite ao funcionário verificar o número total de veículos(carros e motos) que entraram no estacionamento durante um período específico.
-- **Total de Saídas de veículos:** Permite ao funcionário verificar o número total de veículos(carros e motos) que saíram do estacionamento durante o mesmo período.
-- **Tempo Médio de Permanência dos Carros:** Permite ao funcionário verificar a média do tempo que os carros permaneceram estacionados no estacionamento antes de sair.
-- **Tempo Médio de Permanência das Motos:** Permite ao funcionário verificar a média do tempo que as motos permaneceram estacionadas no estacionamento antes de sair.
-- **Taxa de Ocupação do Estacionamento:** Permite ao funcionário verificar a porcentagem da capacidade total do estacionamento que está sendo utilizada durante o período especificado.
-- **Entradas de veículos por Hora:** Permite ao funcionário verificar o número de veículos(carros e motos) que entraram no estacionamento em cada hora específica do dia.
-- **Saídas de veículos por Hora:** Permite ao funcionário verificar o número de veículos(carros e motos) que saíram do estacionamento em cada hora específica do dia.
+- **Efetuar estacionamento de veículos:** Permite ao funcionário reservar uma vaga para um vaículo(carro/moto) em um estabelecimento específico.
+- **Efetuar liberação de veículos:** Permite ao funcionário liberar uma vaga ocupada por um vaículo(carro/moto) em um estabelecimento específico.
+- **Pesquisar total de Entradas de veículos:** Permite ao funcionário verificar o número total de veículos(carros e motos) que entraram no estacionamento durante um período específico.
+- **Pesquisar  total de Saídas de veículos:** Permite ao funcionário verificar o número total de veículos(carros e motos) que saíram do estacionamento durante o mesmo período.
+- **Pesquisar tempo Médio de Permanência dos Carros:** Permite ao funcionário verificar a média do tempo que os carros permaneceram estacionados no estacionamento antes de sair.
+- **Pesquisar tempo Médio de Permanência das Motos:** Permite ao funcionário verificar a média do tempo que as motos permaneceram estacionadas no estacionamento antes de sair.
+- **Pesquisar taxa de Ocupação do Estacionamento:** Permite ao funcionário verificar a porcentagem da capacidade total do estacionamento que está sendo utilizada durante o período especificado.
+- **Pesquisar entradas de veículos por Hora:** Permite ao funcionário verificar o número de veículos(carros e motos) que entraram no estacionamento em cada hora específica do dia.
+- **Pesquisar saídas de veículos por Hora:** Permite ao funcionário verificar o número de veículos(carros e motos) que saíram do estacionamento em cada hora específica do dia.
 
 ## Modelo conceitual da API
 ![Modelo Conceitual](https://raw.githubusercontent.com/Tibetano/assets/main/Diagrama-classes.png)
