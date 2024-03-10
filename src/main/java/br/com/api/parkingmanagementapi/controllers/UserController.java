@@ -44,8 +44,6 @@ public class UserController {
 
     @PutMapping("/{username}")
     public ResponseEntity<?> updateUser(@PathVariable(value = "username") String username, @Valid @RequestBody UserRequestDTO userRequestDTO){
-        System.out.println("-----------------------------------------");
-        System.out.println(userRequestDTO);
         userCRUDService.updateUser(username, new User(userRequestDTO.username(),
                                    userRequestDTO.password(),
                                    userRequestDTO.cpf(),
