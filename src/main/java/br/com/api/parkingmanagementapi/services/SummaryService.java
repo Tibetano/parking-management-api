@@ -25,7 +25,7 @@ public class SummaryService {
         if(DBEstablishment.isEmpty()){
             throw new RuntimeException("Erro: Establishment not found.");
         }
-        Long numberOfVehicles = customParkingRecordsRepository.countVehicleEntry(DBEstablishment.get(),vehicleType,start, finish);
+        Long numberOfVehicles = customParkingRecordsRepository.countVehicleEntry(DBEstablishment.get().getId(),vehicleType,start, finish);
         return numberOfVehicles;
     }
 
@@ -34,12 +34,12 @@ public class SummaryService {
         if(DBEstablishment.isEmpty()){
             throw new RuntimeException("Erro: Establishment not found.");
         }
-        Long numberOfVehicles = customParkingRecordsRepository.countVehicleExit(DBEstablishment.get(),vehicleType,start, finish);
+        Long numberOfVehicles = customParkingRecordsRepository.countVehicleExit(DBEstablishment.get().getId(),vehicleType,start, finish);
         return numberOfVehicles;
     }
 
     public BigDecimal averageVehiclesDwellTime(VehicleType vehicleType) {
-        var averageTimeInSeconds = customParkingRecordsRepository.CalculateAverageVehicleStayTime(vehicleType);
+        var averageTimeInSeconds = customParkingRecordsRepository.calculateAverageVehicleStayTime(vehicleType);
         BigDecimal zero = new BigDecimal("0.00");
         if(averageTimeInSeconds.compareTo(zero) == 0){//'.compareTo' retorna 0 se os valores forem iguais e 1 caso contrário
             throw new RuntimeException("The average time is zero, as no " + vehicleType.toString().toLowerCase() + "s have parked yet.");
@@ -52,7 +52,7 @@ public class SummaryService {
         if(DBEstablishment.isEmpty()){
             throw new RuntimeException("Erro: Establishment not found.");
         }
-        List<Double> numberParkingRecordOfCarsAndMotorcycles = customParkingRecordsRepository.countVehicleReservationInterval(DBEstablishment.get())
+        List<Double> numberParkingRecordOfCarsAndMotorcycles = customParkingRecordsRepository.countVehicleReservationInterval(DBEstablishment.get().getId())
                 .stream().map(Long::doubleValue).toList();
         if (numberParkingRecordOfCarsAndMotorcycles.isEmpty()){
             throw new RuntimeException("The current occupancy rate is 0%.");
@@ -91,7 +91,7 @@ public class SummaryService {
         if(DBEstablishment.isEmpty()){
             throw new RuntimeException("Erro: Establishment not found.");
         }
-        Map<BigDecimal,Long> DBNumberOfVehiclesPerHour = customParkingRecordsRepository.countVehicleEntryPerHour(DBEstablishment.get(), vehicleType, date);
+        Map<BigDecimal,Long> DBNumberOfVehiclesPerHour = customParkingRecordsRepository.countVehicleEntryPerHour(DBEstablishment.get().getId(), vehicleType, date);
         if(DBNumberOfVehiclesPerHour.isEmpty()){
             throw new RuntimeException("No " + vehicleType.toString().toLowerCase() + "s entered the parking lot at this time.");
         }

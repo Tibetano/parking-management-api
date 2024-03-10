@@ -10,6 +10,7 @@ import br.com.api.parkingmanagementapi.repositories.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
 import java.time.Instant;
 
 @Service
@@ -54,7 +55,7 @@ public class ParkingRecordService {
         parkingRecordRepository.save(new ParkingRecordModel(newParkingRecord));
     }
 
-    public void finishParkingRecord(String plate){
+    public String finishParkingRecord(String plate){
         var DBVehicle = vehicleRepository.findByPlate(plate);
         if(DBVehicle.isEmpty()){
             throw new RuntimeException("Error: vehicle doesn't registered.");
@@ -64,6 +65,16 @@ public class ParkingRecordService {
             throw new RuntimeException("Error: vehicle not found.");
         }
         DBParkingRecord.get().setOutput(Instant.now());
+        System.out.println(DBParkingRecord.get().getInput());
+        System.out.println(DBParkingRecord.get().getOutput());
+
+        var duration = Duration.between(DBParkingRecord.get().getInput(),DBParkingRecord.get().getOutput());
+
+        var hour = duration.toHours();
+        var minutes = duration.toMinutes() % 60;
+
         parkingRecordRepository.save(DBParkingRecord.get());
+
+        return ("Duration: " + hour + " hour(s) and " + minutes + " minute(s).");
     }
 }

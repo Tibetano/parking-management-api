@@ -18,11 +18,9 @@ import java.util.List;
 public class User implements UserDetails {
     private String username;
     private String password;
-
     private String cpf;
     private String phoneNumber;
     private String email;
-
     private UserRole role;
 
     public User(UserModel userModel){

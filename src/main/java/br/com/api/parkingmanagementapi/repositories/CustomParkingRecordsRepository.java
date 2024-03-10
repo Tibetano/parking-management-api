@@ -18,7 +18,7 @@ import java.util.Map;
 @Repository
 public class CustomParkingRecordsRepository {
     @PersistenceContext
-    private EntityManager entityManager;
+    EntityManager entityManager;
 
     public Long countParkingRecordsByVehicle(String establishment_id, VehicleType vehicleType){
         String sql = "SELECT COUNT(*)\n" +
@@ -29,28 +29,28 @@ public class CustomParkingRecordsRepository {
         return (Long) entityManager.createNativeQuery(sql).getSingleResult();
     }
 
-    public Long countVehicleEntry(EstablishmentModel establishmentModel, VehicleType vehicleType, Instant start, Instant finish){
+    public Long countVehicleEntry(String establishment_id, VehicleType vehicleType, Instant start, Instant finish){
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSSZ").withZone(ZoneOffset.UTC);
         String sql = "SELECT COUNT(*)\n" +
                      "FROM parking_records pr INNER JOIN vehicles v ON pr.vehicle_id = v.id\n" +
-                     "WHERE pr.establishment_id = '"+establishmentModel.getId()+"' AND\n" +
+                     "WHERE pr.establishment_id = '"+establishment_id+"' AND\n" +
                      "v.type = '" + vehicleType + "' AND\n" +
                      "pr.input BETWEEN '" + fmt.format(start) + "' AND '" + fmt.format(finish) + "'";
         return (Long) entityManager.createNativeQuery(sql).getSingleResult();
     }
 
-    public Long countVehicleExit(EstablishmentModel establishmentModel,VehicleType vehicleType,Instant start,Instant finish){
+    public Long countVehicleExit(String establishment_id,VehicleType vehicleType,Instant start,Instant finish){
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSSZ").withZone(ZoneOffset.UTC);
         String sql = "SELECT COUNT(*)\n" +
                      "FROM parking_records pr INNER JOIN vehicles v ON pr.vehicle_id = v.id\n" +
-                     "WHERE pr.establishment_id = '" + establishmentModel.getId() + "' AND\n" +
+                     "WHERE pr.establishment_id = '" + establishment_id + "' AND\n" +
                      "    v.type = '" + vehicleType + "' AND\n" +
                      "    pr.input BETWEEN '" + fmt.format(start) + "' AND '" + fmt.format(finish) + "' AND\n" +
                      "    pr.output IS NOT NULL";
         return (Long) entityManager.createNativeQuery(sql).getSingleResult();
     }
 
-    public BigDecimal CalculateAverageVehicleStayTime(VehicleType vehicleType){
+    public BigDecimal calculateAverageVehicleStayTime(VehicleType vehicleType){
         //Essa consulta encontra o tempo médio da duração dos estacionamentos de carros e retorna esse tempo (((EM SEGUNDOS))).
         String sql = "SELECT AVG(EXTRACT(EPOCH FROM intervals.time))\n" +
                      "FROM(\n" +
@@ -62,10 +62,10 @@ public class CustomParkingRecordsRepository {
         return tempoMedioEmSegundos;
     }
 
-    public List<Long> countVehicleReservationInterval(EstablishmentModel establishmentModel){
+    public List<Long> countVehicleReservationInterval(String establishment_id){
         String sql = "SELECT COUNT(v.type)\n" +
                      "FROM parking_records pr INNER JOIN vehicles v ON pr.vehicle_id = v.id\n" +
-                     "WHERE pr.output is NULL AND pr.establishment_id = '" + establishmentModel.getId() + "'\n" +
+                     "WHERE pr.output is NULL AND pr.establishment_id = '" + establishment_id + "'\n" +
                      "GROUP BY v.type";
         List<Long> numberParkingRecordOfCarsAndMotorcycles = entityManager.createNativeQuery(sql).getResultList();
         return numberParkingRecordOfCarsAndMotorcycles;
@@ -100,12 +100,12 @@ public class CustomParkingRecordsRepository {
         return numberParkingRecordOfCarsAndMotorcyclesByEstablishments;
     }
 
-    public Map<BigDecimal,Long> countVehicleEntryPerHour(EstablishmentModel establishmentModel, VehicleType vehicleType, Instant data){
+    public Map<BigDecimal,Long> countVehicleEntryPerHour(String establishment_id, VehicleType vehicleType, Instant data){
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy/MM/dd").withZone(ZoneId.systemDefault());
         Map<BigDecimal,Long> hourVehicleList = new HashMap<>();//(hour,amount)
         String sql = "SELECT EXTRACT(HOUR FROM pr.input), COUNT(*)\n" +
                 "FROM parking_records pr INNER JOIN vehicles v ON pr.vehicle_id = v.id\n" +
-                "WHERE pr.establishment_id = '"+establishmentModel.getId()+"' AND v.type = '"
+                "WHERE pr.establishment_id = '"+establishment_id+"' AND v.type = '"
                 +vehicleType+ "' AND DATE(pr.input) = '"+fmt.format(data)+"' \n" +
                 "GROUP BY EXTRACT(HOUR FROM pr.input)";
         List<Object[]> list = entityManager.createNativeQuery(sql).getResultList();

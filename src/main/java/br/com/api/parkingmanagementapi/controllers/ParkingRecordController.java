@@ -33,8 +33,8 @@ public class ParkingRecordController {
 
     @PutMapping("/{plate}")
     public ResponseEntity<?> finishParkingRecord(@PathVariable(value = "plate") String plate){
-        parkingRecordService.finishParkingRecord(plate);
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new CommonResponseDTO("Vehicle released successfully."));
+        var duration = parkingRecordService.finishParkingRecord(plate);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new CommonResponseDTO("Vehicle released successfully. " + duration));
     }
 
     @GetMapping("/input/{establishment}")
