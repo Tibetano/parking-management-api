@@ -17,16 +17,16 @@ A aplicação consiste em gerenciar as vagas para estacionamentos em estabelecim
 
  1. **Estacionar veículos:** Permite ao funcionário reservar uma vaga para um vaículo (carro/moto) em um estabelecimento específico.
  2. **Liberar veículos:** Permite ao funcionário liberar uma vaga ocupada por um vaículo (carro/moto) em um estabelecimento específico.
- 3. **Consultas:** Permite aos usuários acessarem informações referentes às entidades da api conforme suas permissões.
- 3.1. **Total de Entradas de veículos:** Informa o número total de veículos (carros/motos) que entraram no estacionamento durante um período específico.
- 3.2. **Total de Saídas de veículos:** Informa o número total de veículos (carros/motos) que saíram do estacionamento durante o mesmo período.
- 3.3. **Tempo Médio de Permanência dos veículos:** Informa a média do tempo que os veículos (carros/motos) permaneceram estacionados no estacionamento antes de sair.
- 3.4. **Taxa de Ocupação do(s) Estacionamento(s):** Informa a porcentagem da capacidade total do estacionamento que está sendo utilizada durante o período especificado.
- 3.5. **Entradas de veículos por Hora:** Informa o número de veículos (carros/motos) que entraram no estacionamento em cada hora específica do dia. 
+ 3. **Consultas:** Permite aos usuários acessarem informações referentes às entidades da api conforme suas permissões.  
+ 3.1. **Total de Entradas de veículos:** Informa o número total de veículos (carros/motos) que entraram no estacionamento durante um período específico.  
+ 3.2. **Total de Saídas de veículos:** Informa o número total de veículos (carros/motos) que saíram do estacionamento durante o mesmo período.  
+ 3.3. **Tempo Médio de Permanência dos veículos:** Informa a média do tempo que os veículos (carros/motos) permaneceram estacionados no estacionamento antes de sair.  
+ 3.4. **Taxa de Ocupação do(s) Estacionamento(s):** Informa a porcentagem da capacidade total do estacionamento que está sendo utilizada durante o período especificado.  
+ 3.5. **Entradas de veículos por Hora:** Informa o número de veículos (carros/motos) que entraram no estacionamento em cada hora específica do dia.  
  3.6. **Saídas de veículos por Hora:** Informa o número de veículos (carros/motos) que saíram do estacionamento em cada hora específica do dia.
  4. **CRUD para usuários (comuns e administradores):** Permite aos usuários efetuarem operações CRUD sobre sí próprios.
- 5. **CRUD para estabelecimentos:** Permite aos usuários efetuarem operações CRUD sobre os estabelecimentos;
- 6. **CRUD para veículos:** Permite aos usuários efetuarem operações CRUD sobre veículos;
+ 5. **CRUD para estabelecimentos:** Permite aos usuários efetuarem operações CRUD sobre os estabelecimentos.
+ 6. **CRUD para veículos:** Permite aos usuários efetuarem operações CRUD sobre veículos.
 
 > **Nota:** Algumas permissões de acesso para os recursos da api podem ser visualizadas abaixo no tópico **Exemplos de uso**. 
 
