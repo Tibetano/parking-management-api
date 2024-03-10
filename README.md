@@ -1,4 +1,5 @@
 # Parking Management 
+
 <p align="center">
 <a href="https://github.com/Tibetano/parking-management-api/blob/main/LICENSE" style="text-decoration: none; color: inherit;">  <img src="http://img.shields.io/static/v1?label=License&message=MIT&color=green&style=for-the-badge"/>  </a>
 <a href="https://www.example.com" style="text-decoration: none; color: inherit;">  <img src="http://img.shields.io/badge/Java-17%2B-green?style=for-the-badge&logo=java"/>  </a>
@@ -7,9 +8,6 @@
 <a href="https://www.example.com" style="text-decoration: none; color: inherit;">  <img src="http://img.shields.io/static/v1?label=VERSAO&message=0.0.1&color=GREEN&style=for-the-badge"/>  </a>
 </p>
 
-
-
-
 # Sobre o projeto
 Parking Management  é uma api backend desenvolvida para o gerenciamento de vagas de estacionamentos de carros e motos.
 
@@ -17,15 +15,20 @@ A aplicação consiste em gerenciar as vagas para estacionamentos em estabelecim
 
 ## Recursos disponíveis
 
-- **Efetuar estacionamento de veículos:** Permite ao funcionário reservar uma vaga para um vaículo(carro/moto) em um estabelecimento específico.
-- **Efetuar liberação de veículos:** Permite ao funcionário liberar uma vaga ocupada por um vaículo(carro/moto) em um estabelecimento específico.
-- **Pesquisar total de Entradas de veículos:** Permite ao funcionário verificar o número total de veículos(carros e motos) que entraram no estacionamento durante um período específico.
-- **Pesquisar  total de Saídas de veículos:** Permite ao funcionário verificar o número total de veículos(carros e motos) que saíram do estacionamento durante o mesmo período.
-- **Pesquisar tempo Médio de Permanência dos Carros:** Permite ao funcionário verificar a média do tempo que os carros permaneceram estacionados no estacionamento antes de sair.
-- **Pesquisar tempo Médio de Permanência das Motos:** Permite ao funcionário verificar a média do tempo que as motos permaneceram estacionadas no estacionamento antes de sair.
-- **Pesquisar taxa de Ocupação do Estacionamento:** Permite ao funcionário verificar a porcentagem da capacidade total do estacionamento que está sendo utilizada durante o período especificado.
-- **Pesquisar entradas de veículos por Hora:** Permite ao funcionário verificar o número de veículos(carros e motos) que entraram no estacionamento em cada hora específica do dia.
-- **Pesquisar saídas de veículos por Hora:** Permite ao funcionário verificar o número de veículos(carros e motos) que saíram do estacionamento em cada hora específica do dia.
+ 1. **Estacionar veículos:** Permite ao funcionário reservar uma vaga para um vaículo (carro/moto) em um estabelecimento específico.
+ 2. **Liberar veículos:** Permite ao funcionário liberar uma vaga ocupada por um vaículo (carro/moto) em um estabelecimento específico.
+ 3. **Consultas:** Permite aos usuários acessarem informações referentes às entidades da api conforme suas permissões.
+ 3.1. **Total de Entradas de veículos:** Informa o número total de veículos (carros/motos) que entraram no estacionamento durante um período específico.
+ 3.2. **Total de Saídas de veículos:** Informa o número total de veículos (carros/motos) que saíram do estacionamento durante o mesmo período.
+ 3.3. **Tempo Médio de Permanência dos veículos:** Informa a média do tempo que os veículos (carros/motos) permaneceram estacionados no estacionamento antes de sair.
+ 3.4. **Taxa de Ocupação do(s) Estacionamento(s):** Informa a porcentagem da capacidade total do estacionamento que está sendo utilizada durante o período especificado.
+ 3.5. **Entradas de veículos por Hora:** Informa o número de veículos (carros/motos) que entraram no estacionamento em cada hora específica do dia. 
+ 3.6. **Saídas de veículos por Hora:** Informa o número de veículos (carros/motos) que saíram do estacionamento em cada hora específica do dia.
+ 4. **CRUD para usuários (comuns e administradores):** Permite aos usuários efetuarem operações CRUD sobre sí próprios.
+ 5. **CRUD para estabelecimentos:** Permite aos usuários efetuarem operações CRUD sobre os estabelecimentos;
+ 6. **CRUD para veículos:** Permite aos usuários efetuarem operações CRUD sobre veículos;
+
+> **Nota:** Algumas permissões de acesso para os recursos da api podem ser visualizadas abaixo no tópico **Exemplos de uso**. 
 
 ## Modelo conceitual da API
 ![Modelo Conceitual](https://raw.githubusercontent.com/Tibetano/assets/main/Diagrama-classes.png)
@@ -39,7 +42,6 @@ A aplicação consiste em gerenciar as vagas para estacionamentos em estabelecim
 - JPA / Hibernate
 - Maven
 - PostgreSQL
-- Docker
 
 # Como executar o projeto
 
@@ -55,10 +57,108 @@ docker-compose up -d --build
 
 # Parar container
 docker-compose down
-
-
 ```
 
+# Exemplos de uso
+
+<table>
+	<thead>
+		<tr>  
+			<th>Recurso</th> 
+			<th>Endpoint</th> 
+			<th>Tipo da requisição</th>
+			<th>Corpo da requisição</th>
+			<th>Permissão</th>  
+		</tr> 
+	</thead>
+	<tbody>
+		<tr>  
+			<td>1</td>  
+			<td>/v1/parkingRecord</td>  
+			<td>POST</td>
+			<td><pre>{<br/>  "cnpj":"ex_cnpj",<br/>  "plate":"ex_plate"<br/>}</pre></td>  
+			<td>admin</td>  
+		</tr> 
+		<tr>  
+			<td>2</td>  
+			<td>/v1/parkingRecord/<b>ex_placa</b></td>  
+			<td>PUT</td>
+			<td><pre></td>  
+			<td>admin</td>  
+		</tr> 
+		<tr>  
+			<td>3.1</td>
+			<td>/v1/parkingRecord/input/<b>ex_cnpjEstablishment</b></td>
+			<td>GET</td>
+			<td></td>
+			<td>admin</td>
+		</tr> 
+		<tr>  
+			<td>3.2</td>  
+			<td>/v1/parkingRecord/output/<b>ex_cnpjEstablishment</b></td>  
+			<td>GET</td>
+			<td></td>  
+			<td>admin</td>  
+		</tr> 
+		<tr>  
+			<td>3.3</td>  
+			<td>/v1/parkingRecord/average-time/<b>ex_vehicleType</b></td>  
+			<td>GET</td>
+			<td></td>  
+			<td>admin</td>  
+		</tr> 
+		<tr>  
+			<td>3.4</td>  
+			<td>/v1/parkingRecord/occupancy-rate</td>  
+			<td>GET</td>
+			<td></td>  
+			<td>user</td>  
+		</tr> 
+		<tr>  
+			<td>3.5</td>  
+			<td>/v1/parkingRecord/entry-hour/<b>ex_cnpjEstablishment</b></td>  
+			<td>GET</td>
+			<td></td>  
+			<td>admin</td>  
+		</tr> 
+		<tr>  
+			<td>3.6</td>  
+			<td>/v1/parkingRecord/exit-hour/<b>ex_cnpjEstablishment</b></td>  
+			<td>GET</td>
+			<td></td>  
+			<td>admin</td>  
+		</tr> 
+		<tr>  
+			<td>4</td>  
+			<td>/v1/user/<b>ex_username</b></td>  
+			<td>DELETE</td>
+			<td></td>  
+			<td>admin</td>  
+		</tr> 
+		<tr>  
+			<td>5</td>  
+			<td>/v1/establishment/<b>ex_cnpjEstablishment</b></td>  
+			<td>PUT</td>
+			<td><pre>{<br/>  "phoneNumber":"(38)3821-4250"<br/>}</pre></td>  
+			<td>admin</td>  
+		</tr> 
+		<tr>  
+			<td>6</td>  
+			<td>/v1/vehicle</td>  
+			<td>POST</td>
+			<td><pre>{
+    "mark":"HONDA",
+    "model":"CG-125-FAN",
+    "color":"BLACK",
+    "plate":"HHZ-0121",
+    "type":"MOTORCYCLE"
+}</pre></td>  
+			<td>admin</td>  
+		</tr>  
+	</tbody>  
+</table>
+
+> **Nota:** Devido a quantidade de recursos/endpoints presentes na api, foram apresentados apenas alguns exemplos dos recursos disponíveis na nessa, no entanto, os demais recursos são intuitivos, de facil entendimento e uso. 
 
 
 # Autor
@@ -66,5 +166,3 @@ docker-compose down
 Lucas Soares Maciel
 
 https://www.linkedin.com/in/lucas-soares-developer
-
-
