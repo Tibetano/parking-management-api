@@ -60,7 +60,7 @@ public class SecurityConfiguration {
                                 "/v1/vehicle/{plate}",
                                 "/v1/e/user/{username}",
                                 "/v1/parkingRecord/{plate}"
-                        ).hasRole("ADMIN")//colocar uma verificação para que um usuário mau intencionado não consiga apagar veiculos de outros usuário e depois remover esse endpoint de apagar veiculos da restrição de só pra admins.
+                        ).hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE,
                                 "/v1/establishment/{cnpj}",
                                 "/v1/vehicle/{plate}",
