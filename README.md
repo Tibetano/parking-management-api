@@ -1,8 +1,9 @@
+
 # Parking Management 
 
 <p align="center">
 <a href="https://github.com/Tibetano/parking-management-api/blob/main/LICENSE" style="text-decoration: none; color: inherit;">  <img src="http://img.shields.io/static/v1?label=License&message=MIT&color=green&style=for-the-badge"/>  </a>
-<a href="https://www.example.com" style="text-decoration: none; color: inherit;">  <img src="http://img.shields.io/badge/Java-21%2B-green?style=for-the-badge&logo=java"/>  </a>
+<a href="https://www.example.com" style="text-decoration: none; color: inherit;">  <img src="http://img.shields.io/badge/Java-21-green?style=for-the-badge&logo=java"/>  </a>
 <a href="https://www.example.com" style="text-decoration: none; color: inherit;">  <img alt="GitHub" src="https://img.shields.io/static/v1?label=GitHub&message=deploy&color=blue&style=for-the-badge&logo=github"/>  </a>
 <a href="https://www.example.com" style="text-decoration: none; color: inherit;">  <img alt="Docker" src="https://img.shields.io/static/v1?label=Docker&message=container&color=blue&style=for-the-badge&logo=docker"/>  </a>
 <a href="https://www.example.com" style="text-decoration: none; color: inherit;">  <img src="http://img.shields.io/static/v1?label=VERSAO&message=0.0.1&color=GREEN&style=for-the-badge"/>  </a>
@@ -48,18 +49,20 @@ A aplicação consiste em gerenciar as vagas para estacionamentos em estabelecim
 
 # Como executar o projeto
 
-Pré-requisitos: Java 21+
+Pré-requisitos: Java 21, Maven, PostgreSQL(database='fcamarafinal', username='postgres', password=123456).
 
 ```bash
-# clonar repositório
+# Clonar repositório
 git clone https://github.com/Tibetano/parking-management-api
 
-# Subir aplicação através do docker
+# Navegar até o diretório raiz do projento onde se encontra o arquivo "pom.xml"
+cd caminho/do/seu/projeto
 
-docker-compose up -d --build
+# Compilar e executar o projeto springboot via Maven
+mvn spring-boot:run
 
-# Parar container
-docker-compose down
+# Subir aplicação através do Docker
+Em construção...
 ```
 
 # Exemplos de uso
