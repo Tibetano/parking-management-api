@@ -13,6 +13,8 @@ Parking Management  é uma api backend desenvolvida para o gerenciamento de vaga
 
 A aplicação consiste em gerenciar as vagas para estacionamentos em estabelecimentos registrados na api, reservando vagas para carros e/ou motos sob demanda de acordo com a disponibilidade das vagas, que podem ser monitoradas através de recursos de análise disponibilizadas pela api. Os dados dos estabelecimentos, usuários e veículos são coletados por api's front ends externas que podem ser web ou mobile.
 
+> **Nota:** Este projeto foi desenvolvido como solução para o teste de vaga backend disponível em "https://github.com/fcamarasantos/backend-test-java", no entanto, não foi submetido para a vaga, sendo desenvolvido com intuito de autoavaliação de conhecimento. 
+
 ## Recursos disponíveis
 
  1. **Estacionar veículos:** Permite ao funcionário reservar uma vaga para um vaículo (carro/moto) em um estabelecimento específico.
