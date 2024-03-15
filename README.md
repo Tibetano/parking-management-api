@@ -55,16 +55,18 @@ Pré-requisitos: Java 21, Maven, PostgreSQL(database='fcamarafinal', username='p
 # Clonar repositório
 git clone https://github.com/Tibetano/parking-management-api
 
+## Executar o projeto via terminal
 # Navegar até o diretório raiz do projento onde se encontra o arquivo "pom.xml"
 cd caminho/do/seu/projeto
 
 # Compilar e executar o projeto springboot via Maven
 mvn spring-boot:run
 
+## Executar o projeto via Docker
 # Subir aplicação via Docker
 docker compose up --build -d
 
-# Derrubar a aplicação do docker
+# Derrubar a aplicação do Docker
 docker compose down
 ```
 
