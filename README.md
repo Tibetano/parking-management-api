@@ -61,8 +61,11 @@ cd caminho/do/seu/projeto
 # Compilar e executar o projeto springboot via Maven
 mvn spring-boot:run
 
-# Subir aplicação através do Docker
-Em construção...
+# Subir aplicação via Docker
+docker compose up --build -d
+
+# Derrubar a aplicação do docker
+docker compose down
 ```
 
 # Exemplos de uso
